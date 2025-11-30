@@ -1,0 +1,76 @@
+<div class="container">
+  <div class="header">
+    <button class="btn-back" (click)="volverDashboard()">
+      ← Volver al Dashboard
+    </button>
+  </div>
+
+  <div class="card">
+    <div class="icon-circle success">
+      <span class="icon">✓</span>
+    </div>
+
+    <h1 class="title">¡Reservación Exitosa!</h1>
+    <p class="subtitle">Tu reservación ha sido confirmada</p>
+
+    <div *ngIf="reservacion" class="info-container">
+      
+      <!-- Cliente -->
+      <div class="info-box cliente">
+        <div class="info-icon">👤</div>
+        <div class="info-content">
+          <span class="info-label">CLIENTE</span>
+          <span class="info-value">{{reservacion.nombreCliente}}</span>
+        </div>
+      </div>
+
+      <!-- Área de Reserva -->
+      <div class="info-box area">
+        <div class="info-icon">🛡️</div>
+        <div class="info-content">
+          <span class="info-label">ÁREA DE RESERVA</span>
+          <span class="info-value">{{obtenerNombreArea()}}</span>
+        </div>
+      </div>
+
+      <!-- Horario y Personas -->
+      <div class="info-row">
+        <div class="info-box-small horario">
+          <div class="info-icon-small">🕐</div>
+          <div class="info-content-small">
+            <span class="info-label-small">HORARIO</span>
+            <span class="info-value-large">{{reservacion.horario}}</span>
+          </div>
+        </div>
+
+        <div class="info-box-small personas">
+          <div class="info-icon-small">👥</div>
+          <div class="info-content-small">
+            <span class="info-label-small">PERSONAS</span>
+            <span class="info-value-large">{{reservacion.numeroPersonas}}</span>
+          </div>
+        </div>
+      </div>
+
+      <!-- Fecha de Creación -->
+      <div class="fecha-creacion">
+        <span class="fecha-icon">📅</span>
+        <span class="fecha-text">Creada el {{formatearFecha()}}</span>
+      </div>
+
+      <!-- Mensaje de Éxito -->
+      <div class="success-message">
+        <div class="success-icon">✓</div>
+        <div class="success-content">
+          <p class="success-title">¡Todo listo!</p>
+          <p class="success-text">Tu reservación ha sido registrada exitosamente. Por favor, llega 10 minutos antes de tu horario reservado.</p>
+        </div>
+      </div>
+
+      <!-- Botón Volver -->
+      <button class="btn-volver" (click)="volverMisReservaciones()">
+        Volver a Mis Reservaciones
+      </button>
+    </div>
+  </div>
+</div>
