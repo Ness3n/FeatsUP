@@ -1,0 +1,235 @@
+/* --- Layout principal --- */
+.card-header {
+  background: linear-gradient(to right, #f8e5e5, #ffffff);
+  padding: 25px;
+  border-radius: 20px;
+  margin-bottom: 20px;
+}
+
+.card-header .back {
+  background: none;
+  border: none;
+  color: #444;
+  font-size: 15px;
+  margin-bottom: 10px;
+  cursor: pointer;
+}
+
+.card-header .flex {
+  display: flex;
+  align-items: center;
+  gap: 15px;
+}
+
+.card-header h2 {
+  margin: 0;
+  font-size: 28px;
+  font-weight: 700;
+}
+
+.card-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+/* --- Lista de reservaciones --- */
+.card-list {
+  background: white;
+  padding: 30px;
+  border-radius: 20px;
+  box-shadow: 0 10px 25px rgba(0,0,0,0.07);
+}
+
+.list-head {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.badge {
+  background: #e9b4b4;
+  padding: 5px 12px;
+  border-radius: 12px;
+  font-size: 14px;
+}
+
+/* --- Tarjeta --- */
+.res-card {
+  margin-top: 20px;
+  padding: 25px;
+  border-radius: 16px;
+  background: #fdfdfd;
+  border: 1px solid #eee;
+}
+
+.tag {
+  background: #cdd9ff;
+  padding: 6px 14px;
+  font-size: 13px;
+  border-radius: 12px;
+}
+
+.meta {
+  margin: 10px 0;
+  display: flex;
+  gap: 20px;
+  font-size: 14px;
+  color: #555;
+}
+
+.delete {
+  background: linear-gradient(to right, #d64545, #e75858);
+  border: none;
+  color: white;
+  padding: 12px 22px;
+  border-radius: 14px;
+  cursor: pointer;
+  font-size: 15px;
+  margin-top: 10px;
+  box-shadow: 0 4px 15px rgba(200,0,0,0.3);
+}
+
+/* --- Modal estilo efecto glass --- */
+.modal-overlay {
+  position: fixed;
+  inset: 0;
+  background: rgba(0,0,0,0.55);
+  display: none;
+  justify-content: center;
+  align-items: center;
+  backdrop-filter: blur(3px);
+  z-index: 100;
+}
+
+.modal-overlay.show {
+  display: flex;
+}
+
+.modal-content {
+  background: white;
+  border-radius: 25px;
+  padding: 35px;
+  width: 420px;
+  position: relative;
+  box-shadow: 0 10px 35px rgba(0,0,0,0.2);
+  animation: fadeIn 0.25s ease-out;
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; transform: translateY(-10px);}
+  to   { opacity: 1; transform: translateY(0);}
+}
+
+.modal-close {
+  position: absolute;
+  right: 20px;
+  top: 20px;
+  background: none;
+  border: none;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+.modal-icon {
+  display: flex;
+  justify-content: center;
+  margin-bottom: 10px;
+}
+
+.warning-icon {
+  color: #d64545;
+  background: #ffe9e9;
+  padding: 20px;
+  border-radius: 50%;
+  font-size: 30px;
+}
+
+.modal-title {
+  text-align: center;
+  font-size: 26px;
+  font-weight: 800;
+}
+
+.modal-text {
+  text-align: center;
+  color: #666;
+  margin-bottom: 20px;
+}
+
+/* --- Preview dentro del modal --- */
+.reservation-preview {
+  background: linear-gradient(to right, #8cb6ff, #6ea1ff);
+  border-radius: 14px;
+  padding: 18px;
+  text-align: center;
+  color: white;
+  font-weight: 600;
+  margin-bottom: 18px;
+}
+
+/* --- Caja de advertencia --- */
+.warning-box {
+  background: #ffeaea;
+  border: 1px solid #ffb5b5;
+  padding: 12px;
+  border-radius: 12px;
+  font-size: 14px;
+  display: flex;
+  gap: 10px;
+  margin-bottom: 25px;
+}
+
+/* botones */
+.modal-actions {
+  display: flex;
+  justify-content: space-between;
+  gap: 15px;
+}
+
+.btn-cancel {
+  flex: 1;
+  padding: 12px 0;
+  background: #f1f1f1;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.btn-confirm {
+  flex: 1;
+  padding: 12px 0;
+  background: linear-gradient(to right,#d64545,#e75858);
+  color: white;
+  border-radius: 12px;
+  border: none;
+  font-size: 15px;
+  cursor: pointer;
+}
+
+.alert-success {
+  background: #e4f6ea;
+  color: #2d8a4b;
+  border: 1px solid #b6e2c1;
+  padding: 14px 20px;
+  border-radius: 14px;
+  display: flex;
+  align-items: center;
+  gap: 10px;
+  margin: 15px 0;
+  font-size: 15px;
+  box-shadow: 0 3px 10px rgba(0,0,0,0.07);
+  animation: fadeSlideDown 0.3s ease-out;
+}
+
+.alert-success .icon {
+  font-weight: bold;
+  font-size: 18px;
+}
+
+@keyframes fadeSlideDown {
+  from { opacity: 0; transform: translateY(-8px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+

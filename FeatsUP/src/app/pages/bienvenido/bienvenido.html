@@ -1,14 +1,80 @@
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
-</head>
-<body>
-    <div>FeatsUP</div>
-    <section>
-        
-    </section>
-</body>
-</html>
+<div class="card-header">
+  <button class="back">← Volver al Dashboard</button>
+    <div class="alert-success" *ngIf="successMessage">
+  <span class="icon">✔</span>
+  {{ successMessage }}
+    </div>
+
+
+  <div class="flex">
+    <div class="icon">🗑️</div>
+    <div>
+      <h2>Gestionar Reservaciones</h2>
+      <p>Elimina las reservaciones que ya no necesites</p>
+    </div>
+  </div>
+</div>
+
+<div class="card-list">
+  <div class="list-head">
+    <h3>Todas las Reservaciones</h3>
+    <span class="badge">1 reservación</span>
+  </div>
+
+  <div class="res-card">
+    <span class="tag">Salón Principal</span>
+    <h4>aa ss</h4>
+
+    <div class="meta">
+      <span>🕐 11:11</span>
+      <span>👥 17 personas</span>
+    </div>
+
+    <button class="delete" onclick="openModal()">🗑️ Eliminar</button>
+  </div>
+</div>
+
+<!-- Modal de Confirmación -->
+<div class="modal-overlay" id="modalOverlay" onclick="closeModal()">
+  <div class="modal-content" onclick="event.stopPropagation()">
+    <button class="modal-close" onclick="closeModal()">✕</button>
+    
+    <div class="modal-icon">
+      <div class="warning-icon">⚠</div>
+    </div>
+
+    <h2 class="modal-title">¿Estás seguro?</h2>
+    <p class="modal-text">Estás a punto de eliminar esta reservación. Esta acción no se puede deshacer.</p>
+
+    <div class="reservation-preview">
+      <div class="preview-title">aa ss</div>
+      <div class="preview-subtitle">Salón Principal</div>
+      <div class="preview-details">11:11 • 17 personas</div>
+    </div>
+
+    <div class="warning-box">
+      <span class="warning-icon-small">⚠</span>
+      <span>Esta acción eliminará permanentemente la reservación y no podrás recuperarla.</span>
+    </div>
+
+    <div class="modal-actions">
+      <button class="btn-cancel" onclick="closeModal()">Cancelar</button>
+      <button class="btn-confirm" onclick="confirmDelete()">Sí, Eliminar</button>
+    </div>
+  </div>
+</div>
+
+<script>
+function openModal() {
+  document.getElementById('modalOverlay').style.display = 'flex';
+}
+
+function closeModal() {
+  document.getElementById('modalOverlay').style.display = 'none';
+}
+
+function confirmDelete() {
+  alert('Reservación eliminada');
+  closeModal();
+}
+</script>
