@@ -61,6 +61,6 @@ export class NuevaReservacionComponent implements OnInit {
   }
 
   volverDashboard(): void {
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/nueva-reservacion']);
   }
 }

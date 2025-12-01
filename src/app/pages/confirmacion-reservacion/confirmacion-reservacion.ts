@@ -62,6 +62,6 @@ export class ReservacionExitosaComponent implements OnInit {
 
   volverDashboard(): void {
     this.reservacionService.clearReservacion();
-    this.router.navigate(['/dashboard']);
+    this.router.navigate(['/nueva-reservacion']);
   }
 }
