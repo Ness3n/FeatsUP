@@ -6,7 +6,8 @@ import { Reservacion, AreaReservacion } from '../../models/reservacion.model';
 @Component({
   selector: 'app-reservacion-exitosa',
   templateUrl: './confirmacion-reservacion.html',
-  styleUrls: ['./confirmacion-reservacion.css']
+  styleUrls: ['./confirmacion-reservacion.css'],
+  standalone: false
 })
 export class ReservacionExitosaComponent implements OnInit {
   reservacion: Reservacion | null = null;

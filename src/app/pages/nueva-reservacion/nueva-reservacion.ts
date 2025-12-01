@@ -7,7 +7,8 @@ import { AreaReservacion } from '../../models/reservacion.model';
 @Component({
   selector: 'app-nueva-reservacion',
   templateUrl: './nueva-reservacion.html',
-  styleUrls: ['./nueva-reservacion.css']
+  styleUrls: ['./nueva-reservacion.css'],
+  standalone: false
 })
 export class NuevaReservacionComponent implements OnInit {
   reservacionForm!: FormGroup;
