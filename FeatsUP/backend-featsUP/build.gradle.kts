@@ -14,7 +14,14 @@ application {
   mainClass = "io.ktor.server.netty.EngineMain"
 }
 
+kotlin {
+  compilerOptions {
+    allWarningsAsErrors.set(false)
+  }
+}
+
 dependencies {
+
   implementation("io.ktor:ktor-server-cors")
   implementation("io.ktor:ktor-server-core")
   implementation("io.ktor:ktor-server-content-negotiation")
@@ -27,16 +34,12 @@ dependencies {
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 
   //my dependences
-
   implementation("org.jetbrains.exposed:exposed-core:0.54.0")
   implementation("org.jetbrains.exposed:exposed-dao:0.54.0")
   implementation("org.jetbrains.exposed:exposed-jdbc:0.54.0")
   implementation("org.jetbrains.exposed:exposed-java-time:0.54.0")
+  implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.54.0")
 
-  implementation("org.jetbrains.exposed:exposed-core:0.53.0")
-  implementation("org.jetbrains.exposed:exposed-dao:0.53.0")
-  implementation("org.jetbrains.exposed:exposed-jdbc:0.53.0")
-  implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.53.0")
   // PostgreSQL Driver
   implementation("org.postgresql:postgresql:42.7.3")
 

@@ -10,10 +10,11 @@ import io.ktor.server.request.*
 import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.event.*
-import com.featup.routes.userRoutes   // ← IMPORT CORRECTO
+import com.featup.routes.*
 
 fun Application.configureRouting() {
   routing {
     userRoutes()
+    mesasRoutes()
   }
 }
