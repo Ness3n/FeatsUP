@@ -1,4 +1,4 @@
-package com.example
+package com.featup
 
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
@@ -11,14 +11,9 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.event.*
 
-fun Application.configureHTTP() {
-  install(CORS) {
-    allowMethod(HttpMethod.Options)
-    allowMethod(HttpMethod.Put)
-    allowMethod(HttpMethod.Delete)
-    allowMethod(HttpMethod.Patch)
-    allowHeader(HttpHeaders.Authorization)
-    allowHeader("MyCustomHeader")
-    anyHost() // @TODO: Don't do this in production if possible. Try to limit it.
+fun Application.configureMonitoring() {
+  install(CallLogging) {
+    level = Level.INFO
+    filter { call -> call.request.path().startsWith("/") }
   }
 }

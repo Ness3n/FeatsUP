@@ -1,4 +1,4 @@
-package com.example
+package com.featup
 
 import io.ktor.http.*
 import io.ktor.serialization.kotlinx.json.*
@@ -11,9 +11,13 @@ import io.ktor.server.response.*
 import io.ktor.server.routing.*
 import org.slf4j.event.*
 
-fun Application.configureMonitoring() {
-  install(CallLogging) {
-    level = Level.INFO
-    filter { call -> call.request.path().startsWith("/") }
+fun Application.configureSerialization() {
+  install(ContentNegotiation) {
+    json()
+  }
+  routing {
+    get("/json/kotlinx-serialization") {
+      call.respond(mapOf("hello" to "world"))
+    }
   }
 }
