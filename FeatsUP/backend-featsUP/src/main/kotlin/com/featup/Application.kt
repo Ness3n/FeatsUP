@@ -12,7 +12,7 @@ fun main(args: Array<String>) {
 }
 
 fun Application.module() {
-  DataBaseFactory.init(this)
+  DatabaseFactory.init(this)
   configureHTTP()
   configureSerialization()
   configureMonitoring()
