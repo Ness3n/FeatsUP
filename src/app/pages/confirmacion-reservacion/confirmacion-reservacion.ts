@@ -1,4 +1,4 @@
-<<<<<<< HEAD
+
 import { Component, OnInit } from '@angular/core';
 import { Router } from '@angular/router';
 import { ReservacionService } from '../../services/reservacion.service';
@@ -58,23 +58,11 @@ export class ReservacionExitosaComponent implements OnInit {
 
   volverMisReservaciones(): void {
     this.reservacionService.clearReservacion();
-    this.router.navigate(['/mis-reservaciones']);
+    this.router.navigate(['/customer-reservations']);
   }
 
   volverDashboard(): void {
     this.reservacionService.clearReservacion();
     this.router.navigate(['/nueva-reservacion']);
   }
-=======
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-confirmacion-reservacion',
-  standalone: false,
-  templateUrl: './confirmacion-reservacion.html',
-  styleUrl: './confirmacion-reservacion.css',
-})
-export class ConfirmacionReservacion {
-
->>>>>>> Mario
 }

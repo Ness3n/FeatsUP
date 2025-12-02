@@ -1,10 +1,8 @@
 import { Component } from '@angular/core';
-import { RouterModule } from '@angular/router';
 
 @Component({
   selector: 'app-Bienvenido',
-  standalone: true,
-  imports: [RouterModule],
+  standalone: false,
   templateUrl: './Bienvenido.component.html',
   styleUrls: ['./Bienvenido.component.css']
 })

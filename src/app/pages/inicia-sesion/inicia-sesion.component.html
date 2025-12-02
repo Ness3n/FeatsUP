@@ -1,6 +1,6 @@
 <div class="login-container">
   <div class="card">
-    <a routerLink="/" class="volver">← Volver</a>
+    <a (click)="volverBienvenido()" class="volver" style="cursor: pointer;">← Volver</a>
     <h2 class="titulo">Iniciar Sesión</h2>
     <p class="subtitulo">Accede a tu cuenta</p>
 
@@ -20,12 +20,12 @@
         <small *ngIf="form.get('contrasena')?.errors?.['minlength']">Debe tener al menos 6 caracteres</small>
       </div>
 
-      <button type="submit" class="btn-ingresar" routerLink="/home">Ingresar</button>
+      <button type="submit" class="btn-ingresar">Ingresar</button>
     </form>
 
     <div class="registro-info">
       <div class="separador">——— ¿Primera vez aquí? ———</div>
-      <a routerLink="/register">Puedes crear una cuenta nueva</a>
+      <a (click)="crearCuenta()" style="cursor: pointer;">Puedes crear una cuenta nueva</a>
     </div>
   </div>
 </div>

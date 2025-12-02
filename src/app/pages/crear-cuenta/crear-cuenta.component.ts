@@ -2,6 +2,7 @@ import { Component } from '@angular/core';
 import { RouterModule } from '@angular/router';
 import { ReactiveFormsModule, FormBuilder, Validators, AbstractControl, ValidationErrors } from '@angular/forms';
 import { CommonModule } from '@angular/common';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-crear-cuenta',
@@ -13,7 +14,7 @@ import { CommonModule } from '@angular/common';
 export class RegisterComponent {
   form;
 
-  constructor(private fb: FormBuilder) {
+  constructor(private fb: FormBuilder, private router: Router) {
     this.form = this.fb.group({
       nombre: ['', Validators.required],
       apellidos: ['', Validators.required],
@@ -39,5 +40,6 @@ export class RegisterComponent {
     }
 
     console.log('Formulario válido:', this.form.value);
+    this.router.navigate(['/customer-reservations']);
   }
 }

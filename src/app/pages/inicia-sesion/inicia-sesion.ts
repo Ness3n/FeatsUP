@@ -1,11 +1,2 @@
-import { Component } from '@angular/core';
-
-@Component({
-  selector: 'app-inicia-sesion',
-  standalone: false,
-  templateUrl: './inicia-sesion.html',
-  styleUrl: './inicia-sesion.css',
-})
-export class IniciaSesion {
-
-}
+// Archivo no usado - se usa inicia-sesion.component.ts en su lugar
+// Mantener para referencia histórica

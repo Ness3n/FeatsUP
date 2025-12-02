@@ -1,16 +1,5 @@
 import { Component } from '@angular/core';
 
-<<<<<<< HEAD
-@Component({
-  selector: 'app-gestionreservas',
-  standalone: false,
-  templateUrl: './gestionreservas.html',
-  styleUrl: './gestionreservas.css',
-})
-export class Gestionreservas {
-
-}
-=======
 interface Reservacion {
   id: number;
   nombreCliente: string;
@@ -20,11 +9,12 @@ interface Reservacion {
 }
 
 @Component({
-  selector: 'app-cliente-reservaciones',
-  templateUrl: './cliente-reservaciones.component.html',
-  styleUrls: ['./cliente-reservaciones.component.css']
+  selector: 'app-gestionreservas',
+  standalone: false,
+  templateUrl: './gestionreservas.html',
+  styleUrls: ['./gestionreservas.css'],
 })
-export class ClienteReservacionesComponent {
+export class Gestionreservas {
   reservaciones: Reservacion[] = [
     { id: 1, nombreCliente: 'Mario', area: 'Salón Principal', hora: '11:11', cantidadPersonas: 4 },
     { id: 2, nombreCliente: 'Mario', area: 'Área Niños', hora: '13:30', cantidadPersonas: 6 }
@@ -47,4 +37,4 @@ export class ClienteReservacionesComponent {
     }
   }
 }
->>>>>>> Mario
+
