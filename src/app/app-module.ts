@@ -1,6 +1,6 @@
 import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
-import { ReactiveFormsModule } from '@angular/forms';
+import { FormsModule, ReactiveFormsModule } from '@angular/forms';
 
 import { AppRoutingModule } from './app-routing-module';
 import { App } from './app';
@@ -11,6 +11,7 @@ import { MisReservaciones } from './pages/mis-reservaciones/mis-reservaciones';
 import { NuevaReservacionComponent } from './pages/nueva-reservacion/nueva-reservacion';
 import { ReservacionExitosaComponent } from './pages/confirmacion-reservacion/confirmacion-reservacion';
 import { Gestionreservas } from './pages/gestionreservas/gestionreservas';
+import { ReservationsComponent } from './pages/reservacion-cajero/reservations.component';
 
 @NgModule({
   declarations: [
@@ -21,12 +22,15 @@ import { Gestionreservas } from './pages/gestionreservas/gestionreservas';
     MisReservaciones,
     NuevaReservacionComponent,
     ReservacionExitosaComponent,
-    Gestionreservas
+    Gestionreservas,
   ],
   imports: [
     BrowserModule,
     AppRoutingModule,
-    ReactiveFormsModule
+    ReactiveFormsModule,
+    FormsModule
+    ,
+    ReservationsComponent
   ],
   providers: [],
   bootstrap: [App]
