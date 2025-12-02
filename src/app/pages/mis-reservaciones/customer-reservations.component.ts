@@ -16,7 +16,7 @@ interface Reservation {
   styleUrls: ['./customer-reservations.component.css']
 })
 export class CustomerReservationsComponent implements OnInit {
-  hasReservations: boolean = true; // Cambia a false para ver el estado vacío
+  hasReservations: boolean = true; 
   
   reservation: Reservation = {
     restaurant: 'aa ss',

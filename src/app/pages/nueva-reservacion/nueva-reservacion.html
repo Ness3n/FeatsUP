@@ -15,7 +15,7 @@
 
     <form [formGroup]="reservacionForm" (ngSubmit)="confirmarReservacion()">
       
-      <!-- Nombre del Cliente -->
+      
       <div class="form-group">
         <label class="form-label">
           <span class="icon-label">👤</span>
@@ -28,7 +28,7 @@
           formControlName="nombreCliente">
       </div>
 
-      <!-- Selecciona el Área -->
+      
       <div class="form-group">
         <label class="form-label">
           <span class="icon-label">📍</span>
@@ -48,7 +48,7 @@
         </div>
       </div>
 
-      <!-- Horario y Número de Personas -->
+      
       <div class="form-row">
         <div class="form-group half">
           <label class="form-label">
@@ -83,7 +83,7 @@
         </div>
       </div>
 
-      <!-- Resumen de Reservación -->
+      
       <div class="resumen-box" *ngIf="mostrarResumen()">
         <div class="resumen-header">
           <span class="resumen-icon">✓</span>
@@ -109,7 +109,7 @@
         </div>
       </div>
 
-      <!-- Botón Confirmar -->
+      
       <button 
         type="submit" 
         class="btn-confirmar"

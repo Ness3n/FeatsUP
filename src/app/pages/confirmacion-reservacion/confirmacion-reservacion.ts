@@ -27,7 +27,7 @@ export class ReservacionExitosaComponent implements OnInit {
         if (reservacion) {
           this.reservacion = reservacion;
         } else {
-          // Si no hay reservación, redirigir a nueva reservación
+          
           this.router.navigate(['/nueva-reservacion']);
         }
       }

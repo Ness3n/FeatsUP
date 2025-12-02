@@ -13,7 +13,7 @@
 
 .contenedor {
   display: flex;
-  justify-content: center; /* Centra horizontalmente */
+  justify-content: center; 
   margin-top: 2rem;
 }
 
