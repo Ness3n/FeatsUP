@@ -1,6 +1,13 @@
 ktor:
+  deployment:
+    port: 8080
+
+  application:
+    modules:
+      - com.featup.ApplicationKt.module
+
   database:
-    url: "jdbc:postgresql://localhost:5432/reservaciones_db"
-    driver: "org.postgresql.Driver"
-    user: "postgres"
-    password: "Dragon-57"
+    driver: org.postgresql.Driver
+    url: "jdbc:postgresql://localhost:5432/featsup"
+    user: postgres
+    password: nesantari

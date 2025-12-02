@@ -1,9 +1,10 @@
 package com.featup.database
 
-import io.ktor.server.application.*
+import com.featup.database.tables.UsersTable
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
+import io.ktor.server.application.*
 
 object DatabaseFactory {
 
@@ -23,9 +24,10 @@ object DatabaseFactory {
       password = password
     )
 
-    // Aquí luego creas las tablas si las defines en Exposed
+    println(">>> Conexión a PostgreSQL iniciada correctamente")
+
     transaction {
-      // SchemaUtils.create(Users, Roles, Reservas)
+      SchemaUtils.create(UsersTable)
     }
   }
 }

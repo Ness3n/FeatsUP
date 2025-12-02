@@ -13,8 +13,8 @@ fun main(args: Array<String>) {
 
 fun Application.module() {
   DatabaseFactory.init(this)
+  configureRouting()
   configureHTTP()
   configureSerialization()
   configureMonitoring()
-  configureRouting()
 }
