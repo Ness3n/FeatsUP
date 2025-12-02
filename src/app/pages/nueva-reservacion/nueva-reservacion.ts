@@ -1,3 +1,4 @@
+<<<<<<< HEAD
 import { Component, OnInit } from '@angular/core';
 import { FormBuilder, FormGroup, Validators } from '@angular/forms';
 import { Router } from '@angular/router';
@@ -63,4 +64,16 @@ export class NuevaReservacionComponent implements OnInit {
   volverDashboard(): void {
     this.router.navigate(['/nueva-reservacion']);
   }
+=======
+import { Component } from '@angular/core';
+
+@Component({
+  selector: 'app-nueva-reservacion',
+  standalone: false,
+  templateUrl: './nueva-reservacion.html',
+  styleUrl: './nueva-reservacion.css',
+})
+export class NuevaReservacion {
+
+>>>>>>> Mario
 }
