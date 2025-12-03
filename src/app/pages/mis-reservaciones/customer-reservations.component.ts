@@ -1,5 +1,6 @@
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 interface Reservation {
   restaurant: string;
@@ -11,7 +12,8 @@ interface Reservation {
 
 @Component({
   selector: 'app-customer-reservations',
-  standalone: false,
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './customer-reservations.component.html',
   styleUrls: ['./customer-reservations.component.css']
 })

@@ -1,14 +1,16 @@
 
 import { Component, OnInit } from '@angular/core';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 import { ReservacionService } from '../../services/reservacion.service';
 import { Reservacion, AreaReservacion } from '../../models/reservacion.model';
 
 @Component({
   selector: 'app-reservacion-exitosa',
+  standalone: true,
+  imports: [RouterModule, CommonModule],
   templateUrl: './confirmacion-reservacion.html',
   styleUrls: ['./confirmacion-reservacion.css'],
-  standalone: false
 })
 export class ReservacionExitosaComponent implements OnInit {
   reservacion: Reservacion | null = null;

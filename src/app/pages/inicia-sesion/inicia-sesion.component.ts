@@ -1,10 +1,12 @@
 import { Component } from '@angular/core';
 import { ReactiveFormsModule, FormBuilder, Validators } from '@angular/forms';
-import { Router } from '@angular/router';
+import { Router, RouterModule } from '@angular/router';
+import { CommonModule } from '@angular/common';
 
 @Component({
   selector: 'app-inicia-sesion',
-  standalone: false,
+  standalone: true,
+  imports: [ReactiveFormsModule, RouterModule, CommonModule],
   templateUrl: './inicia-sesion.component.html',
   styleUrls: ['./inicia-sesion.component.css']
 })

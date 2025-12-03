@@ -17,7 +17,7 @@
         <h1 class="header-title">aa ss</h1>
       </div>
     </div>
-    <button class="btn-logout">Cerrar sesión</button>
+    <button class="btn-logout" routerLink="/inicia-sesion">Cerrar sesión</button>
   </div>
 
   <!-- Content -->
@@ -68,7 +68,7 @@
         <span class="reservation-count">1 reservación</span>
       </div>
 
-      <div class="reservation-card-customer">
+      <div class="reservation-card-customer" routerLink="/gestion-reserva">
         <div class="reservation-header-customer cyan">
           <h3 class="reservation-name-customer">{{ reservation.restaurant }}</h3>
           <p class="reservation-area-customer">
