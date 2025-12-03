@@ -36,5 +36,10 @@ export const routes: Routes = [
     path: 'gestion-reserva',
     loadComponent: () =>
       import('./pages/gestionreservas/gestionreservas').then(m => m.GestionreservasComponent)
-  }
+  },
+{
+    path: 'vista-cajero',
+    loadComponent: () =>
+      import('./pages/reservacion-cajero/reservations.component').then(m => m.ReservationsComponent)
+  },
 ];
