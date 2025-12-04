@@ -1,23 +1,46 @@
 package com.featup
 
-import io.ktor.server.application.*
-import io.ktor.server.routing.*
 import com.featup.database.DatabaseFactory
-import com.featup.configureHTTP
-import com.featup.configureSerialization
-import com.featup.configureMonitoring
-import com.featup.routes.userRoutes   // ← IMPORT CORRECTO
-
-fun main(args: Array<String>) {
-  io.ktor.server.netty.EngineMain.main(args)
-}
+import io.ktor.server.application.*
+import io.ktor.server.plugins.calllogging.*
+import io.ktor.server.plugins.cors.routing.*
+import io.ktor.server.plugins.contentnegotiation.*
+import io.ktor.serialization.kotlinx.json.*
+import kotlinx.serialization.json.Json
+import com.featup.routes.*
+import io.ktor.server.routing.*
 
 fun Application.module() {
+
+  // Init database
   DatabaseFactory.init(this)
 
-  configureHTTP()
-  configureSerialization()
-  configureMonitoring()
+  // Logging
+  install(CallLogging)
 
-  configureRouting()   // ← SIEMPRE AL FINAL
+  // CORS
+  install(CORS) {
+    anyHost()
+    allowHeader("*")
+    allowMethod(io.ktor.http.HttpMethod.Post)
+    allowMethod(io.ktor.http.HttpMethod.Get)
+    allowMethod(io.ktor.http.HttpMethod.Delete)
+  }
+
+  // Serialization
+  install(ContentNegotiation) {
+    json(
+      Json {
+        prettyPrint = true
+        ignoreUnknownKeys = true
+        isLenient = true
+      }
+    )
+  }
+
+  // Routes
+  routing {
+    userRoutes()
+    mesasRoutes()
+  }
 }

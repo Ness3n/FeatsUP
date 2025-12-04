@@ -1,0 +1,28 @@
+<div class="container">
+  <div class="header">
+    <button class="btn-back" (click)="volverMisReservaciones()">
+      ← Volver al Dashboard
+    </button>
+  </div>
+
+<h2>Mis Reservaciones</h2>
+
+<div *ngFor="let r of reservaciones" class="card">
+  <div>
+    <strong>{{ r.area }}</strong>
+    <p>🕒 {{ r.hora }} • 👥 {{ r.cantidadPersonas }} personas</p>
+  </div>
+  <button (click)="confirmarEliminacion(r)">Eliminar</button>
+</div>
+
+
+<div *ngIf="reservacionSeleccionada" class="modal">
+  <div class="modal-content">
+    <h3>¿Eliminar reservación?</h3>
+    <p>{{ reservacionSeleccionada.area }} • {{ reservacionSeleccionada.hora }} • {{ reservacionSeleccionada.cantidadPersonas }} personas</p>
+    <button (click)="cancelar()">Cancelar</button>
+    <button (click)="eliminar()">Sí, Eliminar</button>
+  </div>
+</div>
+
+

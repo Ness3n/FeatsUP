@@ -1,47 +1,42 @@
 package com.featup.services
 
-import com.featup.database.tables.UsersTable
 import com.featup.models.User
+import com.featup.models.Users
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
 
 class UserService {
 
   fun getAllUsers(): List<User> = transaction {
-    UsersTable.selectAll().map {
+    Users.selectAll().map {
       User(
-        id = it[UsersTable.id],
-        name = it[UsersTable.name],
-        email = it[UsersTable.email]
+        id = it[Users.id],
+        name = it[Users.name],
+        email = it[Users.email]
       )
     }
   }
 
   fun getUserById(id: Int): User? = transaction {
-    UsersTable
-      .selectAll()
-      .where { UsersTable.id eq id }
-      .map {
-        User(
-          id = it[UsersTable.id],
-          name = it[UsersTable.name],
-          email = it[UsersTable.email]
-        )
-      }
-      .singleOrNull()
+    Users.select { Users.id eq id }.mapNotNull {
+      User(
+        id = it[Users.id],
+        name = it[Users.name],
+        email = it[Users.email]
+      )
+    }.singleOrNull()
   }
 
   fun createUser(user: User): User = transaction {
-    val id = UsersTable.insert {
+    val id = Users.insertAndGetId {
       it[name] = user.name
       it[email] = user.email
-    } get UsersTable.id
+    }.value
 
     user.copy(id = id)
   }
 
   fun deleteUser(id: Int): Boolean = transaction {
-    UsersTable.deleteWhere { UsersTable.id eq id } > 0
+    Users.deleteWhere { Users.id eq id } > 0
   }
 }

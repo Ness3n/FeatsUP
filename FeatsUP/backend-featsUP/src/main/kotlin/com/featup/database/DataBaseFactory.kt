@@ -1,33 +1,26 @@
 package com.featup.database
 
-import com.featup.database.tables.UsersTable
+import com.featup.database.tables.MesasTable
+import io.ktor.server.application.*
 import org.jetbrains.exposed.sql.Database
 import org.jetbrains.exposed.sql.SchemaUtils
 import org.jetbrains.exposed.sql.transactions.transaction
-import io.ktor.server.application.*
+import com.featup.models.Mesa
+import com.featup.models.Users
 
 object DatabaseFactory {
-
   fun init(app: Application) {
+    val url = "jdbc:postgresql://localhost:5432/featsup"
+    val driver = "org.postgresql.Driver"
+    val user = "postgres"
+    val password = "1234"
 
-    val config = app.environment.config
-
-    val driver = config.property("ktor.database.driver").getString()
-    val url = config.property("ktor.database.url").getString()
-    val user = config.property("ktor.database.user").getString()
-    val password = config.property("ktor.database.password").getString()
-
-    Database.connect(
-      url = url,
-      driver = driver,
-      user = user,
-      password = password
-    )
-
-    println(">>> Conexión a PostgreSQL iniciada correctamente")
+    Database.connect(url, driver, user, password)
 
     transaction {
-      SchemaUtils.create(UsersTable)
+      SchemaUtils.create(Users, MesasTable)
     }
+
+    println(">>> PostgreSQL conectado y tablas listas")
   }
 }
