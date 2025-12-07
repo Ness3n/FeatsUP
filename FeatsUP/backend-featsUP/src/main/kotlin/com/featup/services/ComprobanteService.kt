@@ -5,6 +5,7 @@ import com.featup.database.ComprobantesTable
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import java.time.LocalDate
 import java.time.LocalTime
 import java.time.LocalDateTime
@@ -37,4 +38,8 @@ class ComprobanteService {
     horaReservacion = row[ComprobantesTable.horaReservacion].toString(),
     estadoReservacion = row[ComprobantesTable.estadoReservacion]
   )
+  fun delete(id: Int): Boolean = transaction {
+    ComprobantesTable.deleteWhere { ComprobantesTable.id eq id } > 0
+  }
+
 }

@@ -46,4 +46,5 @@ class ReservacionService {
     horaReservacion = row[ReservacionesTable.horaReservacion].toString(),
     estado = row[ReservacionesTable.estado]
   )
+
 }
