@@ -1,47 +1,46 @@
 package com.featup.services
 
-import com.featup.database.tables.UsersTable
-import com.featup.models.User
+import com.featup.models.Usuario
+import com.featup.database.UsuariosTable
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
+import java.time.LocalDate
 
 class UserService {
-
-  fun getAllUsers(): List<User> = transaction {
-    UsersTable.selectAll().map {
-      User(
-        id = it[UsersTable.id],
-        name = it[UsersTable.name],
-        email = it[UsersTable.email]
-      )
-    }
+  fun getAll(): List<Usuario> = transaction {
+    UsuariosTable.selectAll().map { rowToUser(it) }
   }
 
-  fun getUserById(id: Int): User? = transaction {
-    UsersTable
-      .selectAll()
-      .where { UsersTable.id eq id }
-      .map {
-        User(
-          id = it[UsersTable.id],
-          name = it[UsersTable.name],
-          email = it[UsersTable.email]
-        )
-      }
-      .singleOrNull()
+  fun getById(id: Int): Usuario? = transaction {
+    UsuariosTable.selectAll().where(UsuariosTable.id eq id).map { rowToUser(it) }.singleOrNull()
   }
 
-  fun createUser(user: User): User = transaction {
-    val id = UsersTable.insert {
-      it[name] = user.name
-      it[email] = user.email
-    } get UsersTable.id
+  fun create(u: Usuario): Usuario = transaction {
+    val newId = UsuariosTable.insert { row ->
+      row[UsuariosTable.nombre] = u.nombre
+      row[UsuariosTable.apellidos] = u.apellidos
+      row[UsuariosTable.correo] = u.correo
+      row[UsuariosTable.contrasena] = u.contrasena
+      row[UsuariosTable.fechaNacimiento] = u.fechaNacimiento?.let { LocalDate.parse(it) }
+      row[UsuariosTable.celular] = u.celular
+    } get UsuariosTable.id
 
-    user.copy(id = id)
+    getById(newId)!!
   }
 
-  fun deleteUser(id: Int): Boolean = transaction {
-    UsersTable.deleteWhere { UsersTable.id eq id } > 0
+  fun delete(id: Int): Boolean = transaction {
+    UsuariosTable.deleteWhere { UsuariosTable.id eq id } > 0
   }
+
+  private fun rowToUser(row: ResultRow) = Usuario(
+    id = row[UsuariosTable.id],
+    nombre = row[UsuariosTable.nombre],
+    apellidos = row[UsuariosTable.apellidos],
+    correo = row[UsuariosTable.correo],
+    contrasena = row[UsuariosTable.contrasena],
+    fechaNacimiento = row[UsuariosTable.fechaNacimiento]?.toString(),
+    celular = row[UsuariosTable.celular]
+  )
 }

@@ -1,60 +1,44 @@
 package com.featup.services
 
 import com.featup.models.Mesa
-import com.featup.database.tables.MesasTable
+import com.featup.database.MesasTable
+import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.*
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import org.jetbrains.exposed.sql.transactions.transaction
+import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 class MesaService {
+  fun getAll(): List<Mesa> = transaction { MesasTable.selectAll().map { rowToMesa(it) } }
 
-  fun getAll(): List<Mesa> = transaction {
-    MesasTable
-      .selectAll()
-      .map {
-        Mesa(
-          id = it[MesasTable.id],
-          name = it[MesasTable.name],
-          capacidad = it[MesasTable.capacidad],
-          disponible = it[MesasTable.disponible]
-        )
-      }
-  }
+  fun getById(id: Int): Mesa? = transaction { MesasTable.selectAll().where { MesasTable.id eq id }.map { rowToMesa(it) }.singleOrNull() }
 
-  fun getById(id: Int): Mesa? = transaction {
-    MesasTable
-      .selectAll()
-      .where { MesasTable.id eq id }
-      .singleOrNull()
-      ?.let {
-        Mesa(
-          id = it[MesasTable.id],
-          name = it[MesasTable.name],
-          capacidad = it[MesasTable.capacidad],
-          disponible = it[MesasTable.disponible]
-        )
-      }
-  }
-
-  fun create(mesa: Mesa): Mesa = transaction {
-    val inserted = MesasTable.insert {
-      it[name] = mesa.name
-      it[capacidad] = mesa.capacidad
-      it[disponible] = mesa.disponible
+  fun create(m: Mesa): Mesa = transaction {
+    val newId = MesasTable.insert { row ->
+      row[MesasTable.numeroMesa] = m.numeroMesa
+      row[MesasTable.numeroSillas] = m.numeroSillas
+      row[MesasTable.estado] = m.estado
+      row[MesasTable.area] = m.area
     } get MesasTable.id
-
-    mesa.copy(id = inserted)
+    getById(newId)!!
   }
 
-  fun update(id: Int, mesa: Mesa): Boolean = transaction {
+  fun update(id: Int, m: Mesa): Mesa? = transaction {
     MesasTable.update({ MesasTable.id eq id }) {
-      it[name] = mesa.name
-      it[capacidad] = mesa.capacidad
-      it[disponible] = mesa.disponible
-    } > 0
+      it[numeroMesa] = m.numeroMesa
+      it[numeroSillas] = m.numeroSillas
+      it[estado] = m.estado
+      it[area] = m.area
+    }
+    getById(id)
   }
 
-  fun delete(id: Int): Boolean = transaction {
-    MesasTable.deleteWhere { MesasTable.id eq id } > 0
-  }
+  fun delete(id: Int): Boolean = transaction { MesasTable.deleteWhere { MesasTable.id eq id } > 0 }
+
+  private fun rowToMesa(row: ResultRow) = Mesa(
+    id = row[MesasTable.id],
+    numeroMesa = row[MesasTable.numeroMesa],
+    numeroSillas = row[MesasTable.numeroSillas],
+    estado = row[MesasTable.estado],
+    area = row[MesasTable.area]
+  )
 }

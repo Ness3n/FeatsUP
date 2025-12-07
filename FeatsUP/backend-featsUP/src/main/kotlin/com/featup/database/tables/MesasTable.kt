@@ -1,13 +1,13 @@
-package com.featup.database.tables
+package com.featup.database
 
 import org.jetbrains.exposed.sql.Table
-import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 
 object MesasTable : Table("mesas") {
   val id = integer("id").autoIncrement()
-  val name = varchar("name", 100)
-  val capacidad = integer("capacidad")
-  val disponible = bool("disponible").default(true)
+  val numeroMesa = integer("numero_mesa").uniqueIndex()
+  val numeroSillas = integer("numero_sillas")
+  val estado = varchar("estado", 20)
+  val area = varchar("area", 30)
 
   override val primaryKey = PrimaryKey(id)
 }

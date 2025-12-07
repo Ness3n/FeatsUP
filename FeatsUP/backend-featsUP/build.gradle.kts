@@ -23,15 +23,16 @@ kotlin {
 dependencies {
 
   // ---- KTOR 3.x ----
-  implementation("io.ktor:ktor-server-core")
-  implementation("io.ktor:ktor-server-netty")
-  implementation("io.ktor:ktor-server-cors")
-  implementation("io.ktor:ktor-server-call-logging")
-  implementation("io.ktor:ktor-server-content-negotiation")
-  implementation("io.ktor:ktor-server-config-yaml")
+  implementation("io.ktor:ktor-server-core:3.3.2")
+  implementation("io.ktor:ktor-server-netty:3.3.2")
+  implementation("io.ktor:ktor-server-cors:3.3.2")
+  implementation("io.ktor:ktor-server-call-logging:3.3.2")
+  implementation("io.ktor:ktor-server-content-negotiation:3.3.2")
+  implementation("io.ktor:ktor-server-config-yaml:3.3.2")
 
-  // Logging
-  implementation("ch.qos.logback:logback-classic:$logback_version")
+  // ---- SERIALIZATION ----
+  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
+  implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
 
   // ---- EXPOSED ----
   implementation("org.jetbrains.exposed:exposed-core:0.54.0")
@@ -40,14 +41,13 @@ dependencies {
   implementation("org.jetbrains.exposed:exposed-java-time:0.54.0")
   implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.54.0")
 
-  // PostgreSQL
+  // ---- POSTGRES ----
   implementation("org.postgresql:postgresql:42.7.3")
 
-  // Serialization JSON
+  // ---- LOGGING ----
+  implementation("ch.qos.logback:logback-classic:1.2.11")
 
-  implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.6.0")
-
-  // Testing
-  testImplementation("io.ktor:ktor-server-test-host")
+  // ---- TESTING ----
+  testImplementation("io.ktor:ktor-server-test-host:3.3.2")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
 }

@@ -6,8 +6,8 @@ ktor:
     modules:
       - com.featup.ApplicationKt.module
 
-  database:
-    driver: org.postgresql.Driver
-    url: "jdbc:postgresql://localhost:5432/featsup"
-    user: postgres
-    password: nesantari
+database:
+  driver: org.postgresql.Driver
+  url: "jdbc:postgresql://localhost:5432/featsup"
+  user: "postgres"
+  password: "nesantari"

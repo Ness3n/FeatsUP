@@ -1,23 +1,18 @@
 package com.featup
 
+import io.ktor.server.engine.*
+import io.ktor.server.netty.*
 import io.ktor.server.application.*
-import io.ktor.server.routing.*
-import com.featup.database.DatabaseFactory
-import com.featup.configureHTTP
-import com.featup.configureSerialization
-import com.featup.configureMonitoring
-import com.featup.routes.userRoutes   // ← IMPORT CORRECTO
+import com.featup.plugins.DatabaseFactory
+import com.featup.plugins.configureRouting
+import com.featup.plugins.configureSerialization
+import com.featup.plugins.configureCORS
 
-fun main(args: Array<String>) {
-  io.ktor.server.netty.EngineMain.main(args)
-}
+fun main(args: Array<String>) = EngineMain.main(args)
 
 fun Application.module() {
-  DatabaseFactory.init(this)
-
-  configureHTTP()
+  DatabaseFactory.init(environment.config)
   configureSerialization()
-  configureMonitoring()
-
-  configureRouting()   // ← SIEMPRE AL FINAL
+  configureCORS()
+  configureRouting()
 }
