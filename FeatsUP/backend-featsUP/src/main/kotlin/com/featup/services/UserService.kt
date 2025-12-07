@@ -17,6 +17,13 @@ class UserService {
     UsuariosTable.selectAll().where(UsuariosTable.id eq id).map { rowToUser(it) }.singleOrNull()
   }
 
+  // Dentro de la clase UserService
+  fun getByCorreo(correo: String): Usuario? = transaction {
+    UsuariosTable.selectAll().where(UsuariosTable.correo eq correo)
+      .map { rowToUser(it) }
+      .singleOrNull()
+  }
+
   fun create(u: Usuario): Usuario = transaction {
     val newId = UsuariosTable.insert { row ->
       row[UsuariosTable.nombre] = u.nombre

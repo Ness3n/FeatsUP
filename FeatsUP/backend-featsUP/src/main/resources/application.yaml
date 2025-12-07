@@ -11,3 +11,10 @@ database:
   url: "jdbc:postgresql://localhost:5432/featsup"
   user: "postgres"
   password: "nesantari"
+
+jwt:
+  secret: "${JWT_SECRET}"   # Aquí toma el valor de tu env var
+  issuer: "featup"
+  audience: "featup_audience"
+  realm: "featup-realm"
+  expiresInMinutes: 60

@@ -50,4 +50,11 @@ dependencies {
   // ---- TESTING ----
   testImplementation("io.ktor:ktor-server-test-host:3.3.2")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
+
+  // agrega dentro de `dependencies { ... }`
+  implementation("io.ktor:ktor-server-auth:3.3.2")
+  implementation("io.ktor:ktor-server-auth-jwt:3.3.2")
+  implementation("com.auth0:java-jwt:4.4.0")
+  implementation("at.favre.lib:bcrypt:0.9.0")
+
 }
