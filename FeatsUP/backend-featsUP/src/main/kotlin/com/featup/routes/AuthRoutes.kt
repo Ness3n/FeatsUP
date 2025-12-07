@@ -6,9 +6,18 @@ import io.ktor.server.routing.*
 import io.ktor.server.response.*
 import io.ktor.server.request.*
 import io.ktor.server.application.*
+import kotlinx.serialization.Serializable
 
-data class LoginRequest(val correo: String, val contrasena: String)
-data class LoginResponse(val token: String)
+@Serializable
+data class LoginRequest(
+  val correo: String,
+  val contrasena: String
+)
+
+@Serializable
+data class LoginResponse(
+  val token: String
+)
 
 fun Route.authRoutes() {
 
@@ -16,6 +25,7 @@ fun Route.authRoutes() {
 
   post("/login") {
     val req = call.receive<LoginRequest>()
+
     val user = userService.getByCorreo(req.correo)
 
     if (user == null || user.contrasena != req.contrasena) {
@@ -25,5 +35,9 @@ fun Route.authRoutes() {
     val token = JwtConfig.generateToken(user.id!!, user.correo)
 
     call.respond(LoginResponse(token))
+
+    println(">>> LOGIN RECIBIDO: ${req.correo} - ${req.contrasena}")
+    println(">>> USER ENCONTRADO: $user")
   }
 }
+
