@@ -1,14 +1,26 @@
 export interface Reservacion {
-  nombreCliente: string;
-  area: 'principal' | 'ninos' | 'privada';
-  horario: string;
-  numeroPersonas: number;
-  fechaCreacion?: Date;
+  id?: number;            // En Kotlin es Int?
+  usuarioId: number;      // En Kotlin es Int
+  mesaId: number;         // En Kotlin es Int
+  fechaReservacion: string; // String
+  horaReservacion: string;  // String
+  estado?: string;        // String (default "ACTIVA")
 }
 
-export interface AreaReservacion {
-  id: string;
+export interface Usuario {
+  id?: number;
   nombre: string;
-  descripcion: string;
-  icono: string;
+  apellidos?: string;
+  correo: string;
+  contrasena: string;
+  fechaNacimiento?: string;
+  celular?: string;
+  rol?: string;
+}
+
+// Para la respuesta del login
+export interface LoginResponse {
+  token: string;
+  rol: string;
+  id: number; // Agregamos esto gracias al cambio en el backend
 }

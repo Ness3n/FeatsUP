@@ -29,7 +29,7 @@ export const routes: Routes = [
   {
     path: 'reservacion-exitosa',
     loadComponent: () =>
-      import('./pages/confirmacion-reservacion/confirmacion-reservacion').then(m => m.ReservacionExitosaComponent)
+      import('./pages/confirmacion-reservacion/confirmacion-reservacion').then(m => m.ConfirmacionReservacionComponent)
   }
   ,
   {

@@ -1,70 +1,53 @@
-
 import { Component, OnInit } from '@angular/core';
 import { Router, RouterModule } from '@angular/router';
 import { CommonModule } from '@angular/common';
-import { ReservacionService } from '../../services/reservacion.service';
-import { Reservacion, AreaReservacion } from '../../models/reservacion.model';
 
 @Component({
-  selector: 'app-reservacion-exitosa',
+  selector: 'app-confirmacion-reservacion',
   standalone: true,
-  imports: [RouterModule, CommonModule],
+  imports: [CommonModule, RouterModule],
   templateUrl: './confirmacion-reservacion.html',
-  styleUrls: ['./confirmacion-reservacion.css'],
+  styleUrls: ['./confirmacion-reservacion.css'] // Asegúrate de que el nombre coincida
 })
-export class ReservacionExitosaComponent implements OnInit {
-  reservacion: Reservacion | null = null;
-  areas: AreaReservacion[] = [];
+export class ConfirmacionReservacionComponent implements OnInit {
+  // Definimos la estructura de datos que espera el HTML
+  reservacion: any = null;
 
-  constructor(
-    private reservacionService: ReservacionService,
-    private router: Router
-  ) {}
+  constructor(private router: Router) {
+    // Intentamos recuperar los datos pasados por la navegación
+    const navigation = this.router.getCurrentNavigation();
+    if (navigation?.extras?.state) {
+      this.reservacion = navigation.extras.state['datos'];
+    }
+  }
 
   ngOnInit(): void {
-    this.areas = this.reservacionService.getAreas();
-    
-    this.reservacionService.getReservacionActual().subscribe(
-      reservacion => {
-        if (reservacion) {
-          this.reservacion = reservacion;
-        } else {
-          
-          this.router.navigate(['/nueva-reservacion']);
-        }
-      }
-    );
+    // Si alguien entra directo a esta url sin reservar, lo regresamos
+    if (!this.reservacion) {
+      this.router.navigate(['/customer-reservations']);
+    }
   }
 
+  // Función que pide el HTML
   obtenerNombreArea(): string {
-    if (!this.reservacion) return '';
-    
-    const area = this.areas.find(a => a.id === this.reservacion!.area);
-    return area ? area.nombre : 'Salón Principal';
+    return this.reservacion?.areaNombre || 'Área General';
   }
 
+  // Función que pide el HTML
   formatearFecha(): string {
-    if (!this.reservacion?.fechaCreacion) return '';
-    
-    const fecha = new Date(this.reservacion.fechaCreacion);
-    const dia = fecha.getDate().toString().padStart(2, '0');
-    const meses = ['enero', 'febrero', 'marzo', 'abril', 'mayo', 'junio', 
-                   'julio', 'agosto', 'septiembre', 'octubre', 'noviembre', 'diciembre'];
-    const mes = meses[fecha.getMonth()];
-    const año = fecha.getFullYear();
-    const hora = fecha.getHours().toString().padStart(2, '0');
-    const minutos = fecha.getMinutes().toString().padStart(2, '0');
-    
-    return `${dia} de ${mes} de ${año}, ${hora}:${minutos}`;
+    const fecha = new Date();
+    return fecha.toLocaleDateString('es-ES', {
+      day: 'numeric',
+      month: 'long',
+      year: 'numeric'
+    });
   }
 
   volverMisReservaciones(): void {
-    this.reservacionService.clearReservacion();
     this.router.navigate(['/customer-reservations']);
   }
 
   volverDashboard(): void {
-    this.reservacionService.clearReservacion();
-    this.router.navigate(['/nueva-reservacion']);
+    this.router.navigate(['/customer-reservations']);
   }
 }

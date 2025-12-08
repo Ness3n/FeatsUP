@@ -1,50 +1,50 @@
 import { Injectable } from '@angular/core';
-import { BehaviorSubject, Observable } from 'rxjs';
-import { Reservacion, AreaReservacion } from '../models/reservacion.model';
+import { HttpClient, HttpHeaders } from '@angular/common/http';
+import { Observable } from 'rxjs';
+import { Reservacion } from '../models/reservacion.model';
+import { environment } from '../../environments/environment';
+import { AuthService } from './auth.service';
 
 @Injectable({
   providedIn: 'root'
 })
 export class ReservacionService {
-  private reservacionActual = new BehaviorSubject<Reservacion | null>(null);
+  private apiUrl = `${environment.apiUrl}/reservaciones`;
 
-  private areas: AreaReservacion[] = [
-    {
-      id: 'principal',
-      nombre: 'Salón Principal',
-      descripcion: 'Mesa general en el salón',
-      icono: '🍽️'
-    },
-    {
-      id: 'ninos',
-      nombre: 'Área de Niños',
-      descripcion: 'Espacio familiar con juegos',
-      icono: '🎈'
-    },
-    {
-      id: 'privada',
-      nombre: 'Área Privada',
-      descripcion: 'Espacio exclusivo y privado',
-      icono: '👑'
+  constructor(private http: HttpClient, private authService: AuthService) { }
+
+  // Crear reservación (POST /reservaciones)
+  crearReservacion(reservacion: Reservacion): Observable<Reservacion> {
+    return this.http.post<Reservacion>(this.apiUrl, reservacion, this.getHeaders());
+  }
+
+  // Obtener mis reservaciones (GET /reservaciones/usuario/{uid})
+  getMisReservaciones(): Observable<Reservacion[]> {
+    const userId = this.authService.getUserId();
+    if (!userId) {
+        // Manejar caso de no logueado
+        throw new Error('Usuario no autenticado');
     }
-  ];
-
-  constructor() { }
-
-  getAreas(): AreaReservacion[] {
-    return this.areas;
+    return this.http.get<Reservacion[]>(`${this.apiUrl}/usuario/${userId}`, this.getHeaders());
   }
 
-  setReservacion(reservacion: Reservacion): void {
-    reservacion.fechaCreacion = new Date();
-    this.reservacionActual.next(reservacion);
+  // Obtener todas (GET /reservaciones) - Para admins/cajeros
+  getAllReservaciones(): Observable<Reservacion[]> {
+    return this.http.get<Reservacion[]>(this.apiUrl, this.getHeaders());
   }
 
-  getReservacionActual(): Observable<Reservacion | null> {
-    return this.reservacionActual.asObservable();
+  // Eliminar (DELETE /reservaciones/{id})
+  eliminarReservacion(id: number): Observable<any> {
+    return this.http.delete(`${this.apiUrl}/${id}`, this.getHeaders()); // Ktor devuelve texto, quizás necesites { responseType: 'text' as 'json' } si falla el parseo
   }
 
-  clearReservacion(): void {
-    this.reservacionActual.next(null);
+  private getHeaders() {
+    const token = localStorage.getItem('token');
+    return {
+      headers: new HttpHeaders({
+        'Authorization': `Bearer ${token}`,
+        'Content-Type': 'application/json'
+      })
+    };
   }
 }

@@ -15,7 +15,6 @@
 
     <form [formGroup]="reservacionForm" (ngSubmit)="confirmarReservacion()">
       
-      
       <div class="form-group">
         <label class="form-label">
           <span class="icon-label">👤</span>
@@ -24,31 +23,10 @@
         <input 
           type="text" 
           class="form-input"
-          placeholder="aa ss"
+          placeholder="Tu nombre"
           formControlName="nombreCliente">
       </div>
 
-      
-      <div class="form-group">
-        <label class="form-label">
-          <span class="icon-label">📍</span>
-          Selecciona el Área
-        </label>
-        <div class="areas-grid">
-          <div 
-            *ngFor="let area of areas"
-            class="area-card"
-            [class.selected]="areaSeleccionada === area.id"
-            (click)="seleccionarArea(area.id)">
-            <div class="checkmark" *ngIf="areaSeleccionada === area.id">✓</div>
-            <div class="area-icon">{{area.icono}}</div>
-            <h3 class="area-nombre">{{area.nombre}}</h3>
-            <p class="area-descripcion">{{area.descripcion}}</p>
-          </div>
-        </div>
-      </div>
-
-      
       <div class="form-row">
         <div class="form-group half">
           <label class="form-label">
@@ -69,12 +47,11 @@
           <input 
             type="number" 
             class="form-input"
-            placeholder="1?"
+            placeholder="1"
             formControlName="numeroPersonas">
         </div>
       </div>
 
-      <!-- Advertencias -->
       <div class="alert-box">
         <span class="alert-icon">⚠️</span>
         <div class="alert-content">
@@ -83,7 +60,6 @@
         </div>
       </div>
 
-      
       <div class="resumen-box" *ngIf="mostrarResumen()">
         <div class="resumen-header">
           <span class="resumen-icon">✓</span>
@@ -92,24 +68,23 @@
         <div class="resumen-content">
           <div class="resumen-row">
             <span class="resumen-label">Cliente:</span>
-            <span class="resumen-label">Área:</span>
+            <span></span> 
           </div>
           <div class="resumen-row">
-            <span class="resumen-value">{{reservacionForm.get('nombreCliente')?.value || 'aa ss'}}</span>
-            <span class="resumen-value">{{obtenerNombreArea()}}</span>
+            <span class="resumen-value">{{reservacionForm.get('nombreCliente')?.value || 'Tu nombre'}}</span>
           </div>
+          
           <div class="resumen-row mt">
             <span class="resumen-label">Horario:</span>
             <span class="resumen-label">Personas:</span>
           </div>
           <div class="resumen-row">
-            <span class="resumen-value">{{reservacionForm.get('horario')?.value || '11:11'}}</span>
-            <span class="resumen-value">{{reservacionForm.get('numeroPersonas')?.value || '1?'}}</span>
+            <span class="resumen-value">{{reservacionForm.get('horario')?.value || '--:--'}}</span>
+            <span class="resumen-value">{{reservacionForm.get('numeroPersonas')?.value || '1'}}</span>
           </div>
         </div>
       </div>
 
-      
       <button 
         type="submit" 
         class="btn-confirmar"
