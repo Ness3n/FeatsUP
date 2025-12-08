@@ -31,6 +31,7 @@ object DatabaseFactory {
     transaction {
       addLogger(StdOutSqlLogger)
     }
+    println(">>> CONECTANDO A: ${config.property("database.url").getString()}")
   }
 
 }

@@ -8,12 +8,12 @@ ktor:
 
 database:
   driver: org.postgresql.Driver
-  url: "jdbc:postgresql://localhost:5432/featsup"
+  url: "jdbc:postgresql://34.227.59.186:5432/featsup"
   user: "postgres"
   password: "nesantari"
 
 jwt:
-  secret: "${JWT_SECRET}"   # Aquí toma el valor de tu env var
+  secret: "${JWT_SECRET}"
   issuer: "featup"
   audience: "featup_audience"
   realm: "featup-realm"
