@@ -2,6 +2,7 @@ package com.featup.services
 
 import com.featup.models.Usuario
 import com.featup.database.UsuariosTable
+import com.featup.security.PasswordService
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -9,27 +10,33 @@ import org.jetbrains.exposed.sql.SqlExpressionBuilder.eq
 import java.time.LocalDate
 
 class UserService {
+
   fun getAll(): List<Usuario> = transaction {
     UsuariosTable.selectAll().map { rowToUser(it) }
   }
 
   fun getById(id: Int): Usuario? = transaction {
-    UsuariosTable.selectAll().where(UsuariosTable.id eq id).map { rowToUser(it) }.singleOrNull()
+    UsuariosTable.selectAll()
+      .where(UsuariosTable.id eq id)
+      .map { rowToUser(it) }
+      .singleOrNull()
   }
 
-  // Dentro de la clase UserService
   fun getByCorreo(correo: String): Usuario? = transaction {
-    UsuariosTable.selectAll().where(UsuariosTable.correo eq correo)
+    UsuariosTable.selectAll()
+      .where(UsuariosTable.correo eq correo)
       .map { rowToUser(it) }
       .singleOrNull()
   }
 
   fun create(u: Usuario): Usuario = transaction {
+    val hashedPassword = PasswordService.hash(u.contrasena)
+
     val newId = UsuariosTable.insert { row ->
       row[UsuariosTable.nombre] = u.nombre
       row[UsuariosTable.apellidos] = u.apellidos
       row[UsuariosTable.correo] = u.correo
-      row[UsuariosTable.contrasena] = u.contrasena
+      row[UsuariosTable.contrasena] = hashedPassword   // 🔥 ENCRIPTADA
       row[UsuariosTable.fechaNacimiento] = u.fechaNacimiento?.let { LocalDate.parse(it) }
       row[UsuariosTable.celular] = u.celular
     } get UsuariosTable.id

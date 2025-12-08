@@ -21,37 +21,23 @@ kotlin {
 }
 
 dependencies {
-
-  // ---- KTOR 3.x ----
   implementation("io.ktor:ktor-server-core:3.3.2")
   implementation("io.ktor:ktor-server-netty:3.3.2")
   implementation("io.ktor:ktor-server-cors:3.3.2")
   implementation("io.ktor:ktor-server-call-logging:3.3.2")
   implementation("io.ktor:ktor-server-content-negotiation:3.3.2")
   implementation("io.ktor:ktor-server-config-yaml:3.3.2")
-
-  // ---- SERIALIZATION ----
   implementation("org.jetbrains.kotlinx:kotlinx-serialization-json:1.7.2")
   implementation("io.ktor:ktor-serialization-kotlinx-json:3.3.2")
-
-  // ---- EXPOSED ----
   implementation("org.jetbrains.exposed:exposed-core:0.54.0")
   implementation("org.jetbrains.exposed:exposed-dao:0.54.0")
   implementation("org.jetbrains.exposed:exposed-jdbc:0.54.0")
   implementation("org.jetbrains.exposed:exposed-java-time:0.54.0")
   implementation("org.jetbrains.exposed:exposed-kotlin-datetime:0.54.0")
-
-  // ---- POSTGRES ----
   implementation("org.postgresql:postgresql:42.7.3")
-
-  // ---- LOGGING ----
   implementation("ch.qos.logback:logback-classic:1.2.11")
-
-  // ---- TESTING ----
   testImplementation("io.ktor:ktor-server-test-host:3.3.2")
   testImplementation("org.jetbrains.kotlin:kotlin-test-junit:$kotlin_version")
-
-  // agrega dentro de `dependencies { ... }`
   implementation("io.ktor:ktor-server-auth:3.3.2")
   implementation("io.ktor:ktor-server-auth-jwt:3.3.2")
   implementation("com.auth0:java-jwt:4.4.0")

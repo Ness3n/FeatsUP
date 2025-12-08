@@ -11,7 +11,7 @@ object JwtConfig {
   private lateinit var issuer: String
   private lateinit var audience: String
   private lateinit var realm: String
-  private var expiresIn: Long = 0
+  private var expiresIn: Long = 60
   private lateinit var algorithm: Algorithm
 
   fun init(config: ApplicationConfig) {
