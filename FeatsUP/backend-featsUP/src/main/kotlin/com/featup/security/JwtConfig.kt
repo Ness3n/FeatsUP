@@ -4,6 +4,7 @@ import com.auth0.jwt.JWT
 import com.auth0.jwt.JWTVerifier
 import com.auth0.jwt.algorithms.Algorithm
 import io.ktor.server.config.*
+import java.util.Date
 
 object JwtConfig {
 
@@ -24,13 +25,14 @@ object JwtConfig {
     algorithm = Algorithm.HMAC256(secret)
   }
 
-  fun generateToken(userId: Int, correo: String): String {
+  fun generateToken(userId: Int, correo: String, rol: String): String {
     return JWT.create()
       .withIssuer(issuer)
       .withAudience(audience)
       .withClaim("userId", userId)
       .withClaim("correo", correo)
-      .withExpiresAt(java.util.Date(System.currentTimeMillis() + expiresIn * 60 * 1000))
+      .withClaim("rol", rol)
+      .withExpiresAt(Date(System.currentTimeMillis() + expiresIn * 60 * 1000))
       .sign(algorithm)
   }
 

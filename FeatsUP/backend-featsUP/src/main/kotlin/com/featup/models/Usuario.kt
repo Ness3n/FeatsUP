@@ -10,5 +10,6 @@ data class Usuario(
   val correo: String,
   val contrasena: String,
   val fechaNacimiento: String? = null,
-  val celular: String? = null
+  val celular: String? = null,
+  val rol: String = "usuario"
 )

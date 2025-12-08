@@ -1,7 +1,6 @@
 package com.featup.routes
 
 import com.featup.security.JwtConfig
-import com.featup.security.PasswordService
 import com.featup.services.UserService
 import io.ktor.server.routing.*
 import io.ktor.server.response.*
@@ -25,23 +24,24 @@ fun Route.authRoutes() {
 
   post("/login") {
     val req = call.receive<LoginRequest>()
-
     val user = userService.getByCorreo(req.correo)
 
     if (user == null) {
-      return@post call.respondText("Credenciales incorrectas")
+      return@post call.respondText("Correo no encontrado")
     }
 
-    val passwordOk = PasswordService.verify(req.contrasena, user.contrasena)
-
-    if (!passwordOk) {
-      return@post call.respondText("Credenciales incorrectas")
+    if (user.contrasena != req.contrasena) {
+      return@post call.respondText("Contraseña incorrecta")
     }
 
-    val token = JwtConfig.generateToken(user.id!!, user.correo)
+    val token = JwtConfig.generateToken(user.id!!, user.correo, user.rol)
 
-    call.respond(LoginResponse(token))
+    call.respond(
+      mapOf(
+        "token" to token,
+        "rol" to user.rol
+      )
+    )
 
-    println(">>> LOGIN OK: ${req.correo}")
   }
 }

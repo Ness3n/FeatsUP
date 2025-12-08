@@ -2,7 +2,6 @@ package com.featup.services
 
 import com.featup.models.Usuario
 import com.featup.database.UsuariosTable
-import com.featup.security.PasswordService
 import org.jetbrains.exposed.sql.selectAll
 import org.jetbrains.exposed.sql.*
 import org.jetbrains.exposed.sql.transactions.transaction
@@ -30,15 +29,14 @@ class UserService {
   }
 
   fun create(u: Usuario): Usuario = transaction {
-    val hashedPassword = PasswordService.hash(u.contrasena)
-
     val newId = UsuariosTable.insert { row ->
       row[UsuariosTable.nombre] = u.nombre
       row[UsuariosTable.apellidos] = u.apellidos
       row[UsuariosTable.correo] = u.correo
-      row[UsuariosTable.contrasena] = hashedPassword   // 🔥 ENCRIPTADA
+      row[UsuariosTable.contrasena] = u.contrasena  // <--- TEXTO NORMAL
       row[UsuariosTable.fechaNacimiento] = u.fechaNacimiento?.let { LocalDate.parse(it) }
       row[UsuariosTable.celular] = u.celular
+      row[UsuariosTable.rol] = u.rol
     } get UsuariosTable.id
 
     getById(newId)!!
@@ -55,6 +53,7 @@ class UserService {
     correo = row[UsuariosTable.correo],
     contrasena = row[UsuariosTable.contrasena],
     fechaNacimiento = row[UsuariosTable.fechaNacimiento]?.toString(),
-    celular = row[UsuariosTable.celular]
+    celular = row[UsuariosTable.celular],
+    rol = row[UsuariosTable.rol]
   )
 }

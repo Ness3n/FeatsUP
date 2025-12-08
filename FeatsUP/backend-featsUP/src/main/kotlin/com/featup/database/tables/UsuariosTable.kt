@@ -11,6 +11,7 @@ object UsuariosTable : Table("usuarios") {
   val contrasena = varchar("contrasena", 255)
   val fechaNacimiento = date("fecha_nacimiento").nullable()
   val celular = varchar("celular", 10).nullable()
+  val rol = varchar("rol", 20).default("usuario")
 
   override val primaryKey = PrimaryKey(id)
 }
