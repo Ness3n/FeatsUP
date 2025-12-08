@@ -38,8 +38,10 @@ fun Route.authRoutes() {
 
     call.respond(
       mapOf(
+
         "token" to token,
-        "rol" to user.rol
+        "rol" to user.rol,
+        "id" to user.id
       )
     )
 
